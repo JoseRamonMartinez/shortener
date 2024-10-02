@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    image: shortener
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/shortener
+      SPRING_REDIS_HOST: redis
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  redis:
+    image: redis:7.0
+    ports:
+      - "6379:6379"
+
+
+volumes:
+  mongo_data:

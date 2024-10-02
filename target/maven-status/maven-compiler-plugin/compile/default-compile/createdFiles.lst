@@ -1,0 +1,5 @@
+com/shortener/infrastructure/api/RedirectGetController.class
+com/shortener/Main.class
+com/shortener/infrastructure/api/ShortenPostController.class
+com/shortener/infrastructure/api/ShortenResponse.class
+com/shortener/infrastructure/api/ShortenRequest.class
