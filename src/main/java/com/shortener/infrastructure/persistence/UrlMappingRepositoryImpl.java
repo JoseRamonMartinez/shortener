@@ -1,9 +1,13 @@
 package com.shortener.infrastructure.persistence;
 
+import com.mongodb.MongoWriteException;
 import com.shortener.domain.Hash;
 import com.shortener.domain.UrlMapping;
 import com.shortener.domain.UrlMappingRepository;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class UrlMappingRepositoryImpl implements UrlMappingRepository {
@@ -15,14 +19,19 @@ public class UrlMappingRepositoryImpl implements UrlMappingRepository {
     }
 
     @Override
-    public void save(UrlMapping urlMapping) {
+    public Optional<UrlMapping> save(UrlMapping urlMapping) {
         UrlMappinEntity urlMappinEntity = UrlMappinEntity.fromDomain(urlMapping);
-        this.urlMappingMongoRepository.save(urlMappinEntity);
+        try {
+            this.urlMappingMongoRepository.save(urlMappinEntity);
+        } catch (DuplicateKeyException e) {
+            return Optional.empty();
+        }
+        return Optional.of(urlMapping);
     }
 
     @Override
-    public UrlMapping findByHash(Hash hash) {
-        UrlMappinEntity urlMappingEntity = this.urlMappingMongoRepository.findByHash(hash.getValue());
-        return urlMappingEntity.toDomain();
+    public Optional<UrlMapping> findByHash(Hash hash) {
+        return this.urlMappingMongoRepository.findByHash(hash.getValue())
+                .map(UrlMappinEntity::toDomain);
     }
 }

@@ -2,6 +2,7 @@ package com.shortener.infrastructure.persistence;
 
 import com.shortener.domain.UrlMapping;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
 @Document(collection = "url-mapping")
 public class UrlMappinEntity {
 
-    @Id
+    @Indexed(unique = true)
     private String hash;
     private String originalUrl;
     private LocalDateTime creationDate;

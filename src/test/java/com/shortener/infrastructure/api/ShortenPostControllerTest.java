@@ -28,7 +28,7 @@ class ShortenPostControllerTest {
 		when(this.shorUrlCreator.create(request.getUrl())).thenReturn(hash);
 
 
-		ResponseEntity<ShortenResponse> response = shortenPostController.index(request);
+		ResponseEntity<ShortenResponse> response = this.shortenPostController.index(request);
 
 		assert response.getStatusCode().is2xxSuccessful();
 		assert Objects.requireNonNull(response.getBody()).getUrl().equals(hash);

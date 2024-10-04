@@ -1,7 +1,9 @@
 package com.shortener.domain;
 
-public interface UrlMappingRepository {
-    void save(UrlMapping urlMapping);
+import java.util.Optional;
 
-    UrlMapping findByHash(Hash hash);
+public interface UrlMappingRepository {
+    Optional<UrlMapping> save(UrlMapping urlMapping);
+
+    Optional<UrlMapping> findByHash(Hash hash);
 }

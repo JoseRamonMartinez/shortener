@@ -1,6 +1,7 @@
 package com.shortener.application;
 
 import com.shortener.domain.Hash;
+import com.shortener.domain.RedirectNotFound;
 import com.shortener.domain.UrlMapping;
 import com.shortener.domain.UrlMappingRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,8 @@ public class RedirectResolver {
     }
 
     public String resolve(String hash) {
-        UrlMapping urlMapping = this.urlMappingRepository.findByHash(new Hash(hash));
-        return urlMapping.getOriginalUrl();
+        return this.urlMappingRepository.findByHash(new Hash(hash))
+                .map(UrlMapping::getOriginalUrl)
+                .orElseThrow(RedirectNotFound::new);
     }
 }

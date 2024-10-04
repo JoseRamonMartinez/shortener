@@ -1,4 +1,12 @@
-spring.application.name=shortener
-spring.data.mongodb.uri=mongodb://localhost:27017/shortener
-spring.redis.host=localhost
-spring.redis.port=6379
+
+spring:
+    application:
+        name: shortener
+    data:
+      mongodb:
+        uri: mongodb://localhost:27017/shortener
+        database: shortener
+        auto-index-creation: true
+      redis:
+        host: localhost
+        port: 6379

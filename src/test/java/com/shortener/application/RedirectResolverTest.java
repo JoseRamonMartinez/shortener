@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
@@ -26,7 +27,7 @@ class RedirectResolverTest {
 		String hash = "Y8hF8Fh";
 		String originalUrl = "https://www.google.com";
 		UrlMapping urlMappingMock = new UrlMapping(originalUrl, hash, LocalDateTime.now(), LocalDateTime.now().plusYears(1));
-		when(this.urlMappingRepository.findByHash(any(Hash.class))).thenReturn(urlMappingMock);
+		when(this.urlMappingRepository.findByHash(any(Hash.class))).thenReturn(Optional.of(urlMappingMock));
 		String originalUrlResolved = redirectResolver.resolve(hash);
 		assert originalUrlResolved.equals(originalUrl);
 		verify(this.urlMappingRepository, times(1)).findByHash(new Hash(hash));
