@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Form from "../components/Form";
+import Title from "../components/Title.astro";
+---
+
+<Layout title="Shortener - Simplify Your Links">
+  <main
+    class="min-h-screen flex flex-col items-center px-6 bg-gradient-to-b from-gray-900 to-gray-800 text-gray-200"
+  >
+    <Title />
+    <Form client:load />
+  </main>
+</Layout>
