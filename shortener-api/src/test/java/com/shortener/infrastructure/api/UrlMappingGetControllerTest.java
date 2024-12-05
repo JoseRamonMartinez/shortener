@@ -1,36 +1,41 @@
 package com.shortener.infrastructure.api;
 
 import com.shortener.application.RedirectResolver;
+import com.shortener.application.UrlMappingFinder;
+import com.shortener.domain.UrlMapping;
+import com.shortener.domain.UrlMappingFilter;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class RedirectGetControllerTest {
+class UrlMappingGetControllerTest {
 
 	@InjectMocks
-	private RedirectGetController redirectGetController;
+	private UrlMappingGetController urlMappingGetController;
 
 	@Mock
-	private RedirectResolver redirectResolver;
+	private UrlMappingFinder urlMappingFinder;
 
 	@Test
-	void shouldRedirect_whenHash() {
-		String originalUrl = "https://www.google.com";
-		String hash = "Y8hF8Fh";
+	void shouldReturnUrlMapping() {
+		UrlMapping urlMapping = new UrlMapping("https://www.google.com", "Y8hF8Fh", LocalDateTime.now(), LocalDateTime.now().plusDays(30));
+		when(this.urlMappingFinder.find(any())).thenReturn(new PageImpl<>(List.of(urlMapping), Pageable.ofSize(1), 1));
+		ResponseEntity<?> response = this.urlMappingGetController.index(new UrlMappingFilter(false, null, null), Pageable.unpaged());
+		assert response.getStatusCode().is2xxSuccessful();
 
-		when(this.redirectResolver.resolve(hash)).thenReturn(originalUrl);
-		ResponseEntity<?> response = this.redirectGetController.index(hash);
-
-		assert response.getStatusCode().is3xxRedirection();
-		assert Objects.requireNonNull(response.getHeaders().getLocation()).toString().equals(originalUrl);
-		verify(this.redirectResolver, times(1)).resolve(hash);
 	}
 
 }

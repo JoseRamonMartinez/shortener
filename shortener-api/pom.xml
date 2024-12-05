@@ -78,4 +78,14 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>pro</id>
+			<properties>
+				<spring.profiles.active>pro</spring.profiles.active>
+			</properties>
+		</profile>
+	</profiles>
+
+
 </project>

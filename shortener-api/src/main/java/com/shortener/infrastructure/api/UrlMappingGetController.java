@@ -1,8 +1,10 @@
 package com.shortener.infrastructure.api;
 
-import com.shortener.application.ShorUrlCreator;
+import com.shortener.application.UrlMappingFinder;
 import com.shortener.domain.UrlMapping;
 import com.shortener.domain.UrlMappingFilter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,21 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class ShortenGetController {
+public class UrlMappingGetController {
 
-    private final  short;
+    private final UrlMappingFinder urlMappingFinder;
 
-    public ShortenGetController(ShorUrlCreator shortUrlCreator) {
-        this.shortUrlCreator = shortUrlCreator;
+    public UrlMappingGetController(UrlMappingFinder urlMappingFinder) {
+        this.urlMappingFinder = urlMappingFinder;
     }
 
-    @GetMapping("/shorten")
-    public ResponseEntity<ShortenResponse> index(UrlMappingFilter filter) {
-        List<UrlMapping> urlMappings = shortUrlCreator
-        var response = shortUrlCreator.create(request.getUrl());
+    @GetMapping("/url-mapping")
+    public ResponseEntity<UrlMappingResponse> index(UrlMappingFilter filter, Pageable pageable) {
+        filter.setPageable(pageable);
+        Page<UrlMapping> urlMappingPage = urlMappingFinder.find(filter);
+        List<UrlMappingResponse.UrlMappingPage> content = urlMappingPage.getContent().stream()
+                .map(urlMapping -> new UrlMappingResponse.UrlMappingPage(urlMapping.getHash(), urlMapping.getCreationDate()))
+                .toList();
+        UrlMappingResponse response = new UrlMappingResponse(content, urlMappingPage.getTotalPages(), urlMappingPage.getTotalElements());
         return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new ShortenResponse(response));
+                .status(HttpStatus.OK)
+                .body(response);
 
     }
 

@@ -18,7 +18,3 @@ spring:
           - "POST"
           - "PUT"
           - "DELETE"
-api:
-  key:
-    header: X-API-KEY
-    value: shortener-api-key

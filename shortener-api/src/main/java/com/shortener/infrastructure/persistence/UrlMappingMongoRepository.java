@@ -4,6 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface UrlMappingMongoRepository extends MongoRepository<UrlMappinEntity, String> {
-    Optional<UrlMappinEntity> findByHash(String hash);
+public interface UrlMappingMongoRepository extends MongoRepository<UrlMappingEntity, String> {
+    Optional<UrlMappingEntity> findByHash(String hash);
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-class UrlMappingGetControllerTest {
+class RedirectGetControllerTest {
 
 	@InjectMocks
 	private RedirectGetController redirectGetController;
