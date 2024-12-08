@@ -1,21 +1,21 @@
 package com.shortener.infrastructure.api;
 
 public class ShortenRequest {
-    String url;
+    String origin;
 
     public ShortenRequest() {
     }
 
-    public ShortenRequest(String url) {
-        this.url = url;
+    public ShortenRequest(String origin) {
+        this.origin = origin;
     }
 
-    public String getUrl() {
-        return url;
+    public String getOrigin() {
+        return origin;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
 }

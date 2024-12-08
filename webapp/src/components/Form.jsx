@@ -29,7 +29,7 @@ export default function Form() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_SERVER}/api/shorten`, {
+      const response = await fetch(`${API_SERVER}/shorten`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,13 +44,16 @@ export default function Form() {
             message: 'An error occurred while shortening the URL. Please try again later.',
             type: 'error'
           }
-        );        setLoading(false);
+        );
+        setLoading(false);
         return;
       }
 
       const data = await response.json();
       setCards((prevCards) => [
-        { href: data.href, origin: url },
+        { href: `${API_SERVER}/${data.hash}`,
+          origin: url 
+        },
         ...prevCards,
       ]);
 

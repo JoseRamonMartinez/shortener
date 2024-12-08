@@ -1,8 +1,9 @@
 package com.shortener.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Url {
+public class Url implements Serializable {
     private String value;
     private static final String URL_REGEX = "^(https?:\\/\\/)?([\\w\\d-]+\\.)+[\\w]{2,}(\\/.*)?$";
 

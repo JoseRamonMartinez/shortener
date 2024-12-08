@@ -1,15 +1,16 @@
 package com.shortener.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class UrlMapping {
-    private Url originalUrl;
+public class UrlMapping implements Serializable {
+    private Url origin;
     private Hash hash;
     private CreationDate creationDate;
     private ExpirationDate expirationDate;
 
-    public UrlMapping(String originalUrl, String hash, LocalDateTime creationDate, LocalDateTime expirationDate) {
-        this.originalUrl = new Url(originalUrl);
+    public UrlMapping(String origin, String hash, LocalDateTime creationDate, LocalDateTime expirationDate) {
+        this.origin = new Url(origin);
         this.hash = new Hash(hash);
         this.creationDate = new CreationDate(creationDate);
         this.expirationDate = new ExpirationDate(expirationDate);
@@ -19,8 +20,8 @@ public class UrlMapping {
         return this.hash.getValue();
     }
 
-    public String getOriginalUrl() {
-        return this.originalUrl.getValue();
+    public String getOrigin() {
+        return this.origin.getValue();
     }
 
     public LocalDateTime getCreationDate() {
@@ -35,8 +36,8 @@ public class UrlMapping {
         this.hash = new Hash(hash);
     }
 
-    public void setOriginalUrl(String originalUrl) {
-        this.originalUrl = new Url(originalUrl);
+    public void setOrigin(String origin) {
+        this.origin = new Url(origin);
     }
 
     public void setCreationDate(LocalDateTime creationDate) {

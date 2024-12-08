@@ -17,7 +17,7 @@ public class RedirectResolver {
 
     public String resolve(String hash) {
         return this.urlMappingRepository.findByHash(new Hash(hash))
-                .map(UrlMapping::getOriginalUrl)
+                .map(UrlMapping::getOrigin)
                 .orElseThrow(RedirectNotFound::new);
     }
 }

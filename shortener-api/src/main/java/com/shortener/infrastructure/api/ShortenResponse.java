@@ -1,20 +1,20 @@
 package com.shortener.infrastructure.api;
 
 public class ShortenResponse {
-    String url;
+    String hash;
 
     public ShortenResponse() {
     }
 
-    public ShortenResponse(String url) {
-        this.url = url;
+    public ShortenResponse(String hash) {
+        this.hash = hash;
     }
 
-    public String getUrl() {
-        return url;
+    public String gethash() {
+        return hash;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void sethash(String url) {
+        this.hash = url;
     }
 }

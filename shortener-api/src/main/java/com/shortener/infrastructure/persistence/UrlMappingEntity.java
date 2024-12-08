@@ -4,6 +4,7 @@ import com.shortener.domain.UrlMapping;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
@@ -12,12 +13,12 @@ public class UrlMappingEntity {
 
     @Indexed(unique = true)
     private String hash;
-    private String originalUrl;
+    private String origin;
     private LocalDateTime creationDate;
     private LocalDateTime expirationDate;
 
-    public UrlMappingEntity(String originalUrl, String hash, LocalDateTime creationDate, LocalDateTime expirationDate) {
-        this.originalUrl = originalUrl;
+    public UrlMappingEntity(String origin, String hash, LocalDateTime creationDate, LocalDateTime expirationDate) {
+        this.origin = origin;
         this.hash = hash;
         this.creationDate = creationDate;
         this.expirationDate = expirationDate;
@@ -27,8 +28,8 @@ public class UrlMappingEntity {
         return this.hash;
     }
 
-    public String getOriginalUrl() {
-        return this.originalUrl;
+    public String getOrigin() {
+        return this.origin;
     }
 
     public LocalDateTime getCreationDate() {
@@ -39,8 +40,8 @@ public class UrlMappingEntity {
         return this.expirationDate;
     }
 
-    public void setOriginalUrl(String originalUrl) {
-        this.originalUrl = originalUrl;
+    public void setOrigin(String origin) {
+        this.origin = origin;
     }
 
     public void setCreationDate(LocalDateTime creationDate) {
@@ -57,7 +58,7 @@ public class UrlMappingEntity {
 
     public UrlMapping toDomain() {
         return new UrlMapping(
-                this.originalUrl,
+                this.origin,
                 this.hash,
                 this.creationDate,
                 this.expirationDate
@@ -66,7 +67,7 @@ public class UrlMappingEntity {
 
     public static UrlMappingEntity fromDomain(UrlMapping urlMapping) {
         return new UrlMappingEntity(
-                urlMapping.getOriginalUrl(),
+                urlMapping.getOrigin(),
                 urlMapping.getHash(),
                 urlMapping.getCreationDate(),
                 urlMapping.getExpirationDate()

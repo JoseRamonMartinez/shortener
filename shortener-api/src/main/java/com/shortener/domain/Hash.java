@@ -1,8 +1,9 @@
 package com.shortener.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Hash {
+public class Hash implements Serializable {
     private String value;
     private static final String HASH_REGEX = "^[a-zA-Z0-9]{7}$";
 

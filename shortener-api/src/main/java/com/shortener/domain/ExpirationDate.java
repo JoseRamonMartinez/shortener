@@ -1,9 +1,10 @@
 package com.shortener.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class ExpirationDate {
+public class ExpirationDate implements Serializable {
     private LocalDateTime value;
 
     public ExpirationDate(LocalDateTime value) {

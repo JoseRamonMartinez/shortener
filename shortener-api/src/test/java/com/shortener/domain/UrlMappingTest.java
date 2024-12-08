@@ -1,107 +1,110 @@
 package com.shortener.domain;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
-public class UrlMappingTest {
+@ExtendWith(MockitoExtension.class)
+class UrlMappingTest {
 
     @Test
     void shouldCreate_whenValidValues() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        UrlMapping urlMapping = new UrlMapping(originalUrl, hash, creationDate, expirationDate);
-        assert urlMapping.getOriginalUrl().equals(originalUrl);
+        UrlMapping urlMapping = new UrlMapping(origin, hash, creationDate, expirationDate);
+        assert urlMapping.getOrigin().equals(origin);
         assert urlMapping.getHash().equals(hash);
         assert urlMapping.getCreationDate().equals(creationDate);
         assert urlMapping.getExpirationDate().equals(expirationDate);
     }
 
     @Test
-    void shouldThrow_whenNullOriginalUrl() {
-        String originalUrl = null;
+    void shouldThrow_whenNullorigin() {
+        String origin = null;
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
-    void shouldThrow_whenEmptyOriginalUrl() {
-        String originalUrl = "";
+    void shouldThrow_whenEmptyorigin() {
+        String origin = "";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
    @Test
-    void shouldThrow_whenIvalidOriginalUrl() {
-        String originalUrl = "htaa//www.google.c";
+    void shouldThrow_whenIvalidorigin() {
+        String origin = "htaa//www.google.c";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
    }
 
     @Test
     void shouldThrow_whenNullHash() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = null;
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
     void shouldThrow_whenEmptyHash() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
     void shouldThrow_whenIvalidHash() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "Y8hF8F";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
     void shouldThrow_whenNullCreationDate() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = null;
         LocalDateTime expirationDate = LocalDateTime.now().plusYears(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
     void shouldThrow_whenNullExpirationDate() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = null;
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
     @Test
     void shouldThrow_whenFutureExpirationDate() {
-        String originalUrl = "https://www.google.com";
+        String origin = "https://www.google.com";
         String hash = "Y8hF8Fh";
         LocalDateTime creationDate = LocalDateTime.now();
         LocalDateTime expirationDate = LocalDateTime.now().minusDays(1);
-        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(originalUrl, hash, creationDate, expirationDate));
+        assertThrows(IllegalArgumentException.class, () -> new UrlMapping(origin, hash, creationDate, expirationDate));
     }
 
 }

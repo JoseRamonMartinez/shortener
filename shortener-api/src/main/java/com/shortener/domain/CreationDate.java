@@ -1,9 +1,10 @@
 package com.shortener.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class CreationDate {
+public class CreationDate implements Serializable {
     private LocalDateTime value;
 
     public CreationDate(LocalDateTime value) {

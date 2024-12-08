@@ -1,20 +1,31 @@
 spring:
-    application:
-        name: shortener
-    data:
-      mongodb:
-        uri: mongodb://localhost:27017/shortener
-        database: shortener
-        auto-index-creation: true
-      redis:
-        host: localhost
-        port: 6379
+  application:
+    name: shortener-api
+  cache:
+    type: redis
+  data:
+    mongodb:
+      uri: mongodb://admin:midudev-is-the-goat-as-programmer@localhost:27017/shortener?authSource=admin
+    redis:
+      host: localhost
+      port: 6379
+      password: midudev-is-a-shit-as-programmer
+  web:
+    cors:
+      allowed-origins: "http://localhost:4321"
+      allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+      allowed-headers: "*"
+      allow-credentials: true
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
     web:
-      cors:
-        allowed-origins:
-          - "http://localhost:3000"
-        allowed-methods:
-          - "GET"
-          - "POST"
-          - "PUT"
-          - "DELETE"
+      exposure:
+        include: health,info
+  health:
+    db:
+      enabled: true
