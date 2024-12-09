@@ -1,6 +1,7 @@
-.idea
-url-shortener-service.iml
-url-shortener.iml
 .DS_Store
-/shortener-api/target/
-/shortener-api/*.iml
+.env
+/shortener-service/target/
+/shortener-service/*.iml
+/shortener-service/.idea
+/webapp/node_modules
+/webapp/dist/

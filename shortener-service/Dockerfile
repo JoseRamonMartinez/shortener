@@ -5,7 +5,7 @@ FROM openjdk:17-jdk-alpine
 WORKDIR /app
 
 # Copy the build artifact from the host to the container
-COPY target/shortener-api-1.0.jar app.jar
+COPY target/shortener-service-1.0.jar app.jar
 
 # Expose the port that Spring Boot will run on
 EXPOSE 8080

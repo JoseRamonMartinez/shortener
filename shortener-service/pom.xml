@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.shortener</groupId>
-	<artifactId>shortener-api</artifactId>
+	<artifactId>shortener-service</artifactId>
 	<version>1.0</version>
-	<name>shortener-api</name>
+	<name>shortener-service</name>
 	<description>URL shortener</description>
 	<url/>
 	<licenses>
