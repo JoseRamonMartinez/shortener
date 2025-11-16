@@ -33,8 +33,9 @@ This project is a URL shortening service built with Astro for the frontend, Spri
 - **Short long urls**: Users can shorten long URLs into easily shareable, concise links.
 - **Redirect urls**: Users can redirect to long URLs from shortened URLs.
 
-To see a project diagram, please visit the [project diagram](/docs/diagram.svg) page.
+The following diagram shows the high-level architecture of the project:
 
+![Project diagram](docs/diagram.svg)
 
 <br>
 
